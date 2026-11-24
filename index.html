@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+<head>
+<link rel="manifest" href="manifest.json"><meta name="theme-color" content="#167544"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Profile - Government Job Autofill</title>
+  <style>*{box-sizing:border-box}body{margin:0;background:#f2f5f3;color:#1c2b22;font:14px Arial,sans-serif}.top{background:#fff;border-bottom:1px solid #dce5df;padding:14px max(20px,calc((100% - 1050px)/2));display:flex;justify-content:space-between;align-items:center;gap:15px;position:sticky;top:0;z-index:5}.brand{display:flex;align-items:center;gap:12px}.brandmark{width:42px;height:42px;border-radius:12px;background:#167544;color:white;display:grid;place-items:center;font-weight:bold}.top h1{font-size:17px;margin:0 0 4px}.top p{margin:0;color:#68766d;font-size:12px}.top-actions{display:flex;gap:8px}.outline,.file-label{border:1px solid #cad8ce;background:#fff;border-radius:7px;padding:9px 12px;color:#254432;font-size:12px;font-weight:bold;cursor:pointer}.file-label input{display:none}main{max-width:1050px;margin:24px auto;padding:0 18px}.intro{margin-bottom:18px}.intro h2{font-size:22px;margin:0 0 7px}.intro p{color:#647269;line-height:1.5;margin:0 0 12px}.notice{background:#fff8e8;border:1px solid #f0dfb8;border-radius:8px;padding:11px 13px;color:#72551b;font-size:12px;line-height:1.5}.panel{background:#fff;border:1px solid #d6e0d9;border-radius:9px;padding:17px;margin:14px 0;box-shadow:0 2px 7px #1a35200a}.panel h3{font-size:15px;color:#fff;background:#78b28b;border-radius:7px;padding:9px 12px;margin:-2px 0 15px}.panel h3 span{font-weight:normal;font-size:12px;margin-left:7px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px 18px}label{display:flex;flex-direction:column;gap:6px;font-size:12px;font-weight:700;color:#33443a}input:not([type=checkbox]),select,textarea{width:100%;border:1px solid #cbd8cf;border-radius:5px;padding:10px 11px;background:#fff;color:#1e2b23;font:13px Arial,sans-serif;min-height:37px}input:focus,select:focus,textarea:focus{outline:2px solid #b7d9c2;border-color:#43865b}textarea{min-height:58px;resize:vertical}.check{display:flex;flex-direction:row;align-items:center;gap:8px;margin:0 0 13px;font-weight:normal}.check input{width:16px;height:16px;accent-color:#167544}.optional-fields.disabled{opacity:.45}.optional-fields.disabled input{background:#f3f5f3}.savebar{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid #d6e0d9;border-radius:9px;padding:14px;position:sticky;bottom:10px;box-shadow:0 3px 12px #172b1b12}.primary,.danger{border:0;border-radius:7px;padding:11px 18px;font-weight:bold;cursor:pointer}.primary{background:#167544;color:#fff}.danger{background:#fff0ef;color:#9b2f27}.savebar span{font-size:12px;color:#167544}footer{text-align:center;color:#87938b;font-size:11px;padding:22px}@media(max-width:650px){.top{position:static;align-items:flex-start;flex-direction:column}.top-actions{width:100%}.grid{grid-template-columns:1fr}.savebar{flex-wrap:wrap;position:static}main{padding:0 12px}.panel{padding:12px}}
+.savebar span.saved{display:block;background:#e8f5ec;border:1px solid #b9ddc4;border-radius:7px;padding:9px 11px;color:#17643a;font-weight:700;line-height:1.45}.savebar span.saving{color:#72551b;font-weight:700}.savebar span.save-error{display:block;background:#fff0ef;border:1px solid #e8b9b5;border-radius:7px;padding:9px 11px;color:#9b2f27;font-weight:700}.primary:disabled{opacity:.65;cursor:wait}
+
+input:not([type=checkbox]),select,textarea{font-size:16px}
+.hint,.info{font-size:12px;color:#647269;line-height:1.6}.info{align-self:center}
+textarea.code{min-height:110px;font:11px monospace;word-break:break-all;margin:8px 0}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.steps{padding-left:20px;line-height:1.8;font-size:13px}.steps li{margin-bottom:4px}
+.alt{background:#0b5fa5;color:#fff;border:0;border-radius:7px;padding:11px 18px;font-weight:bold;cursor:pointer}
+#backupPanel{display:none}#backupPanel.open{display:block}
+.warn{background:#fff0ef;border:1px solid #e8b9b5;color:#9b2f27;border-radius:8px;padding:10px;margin:10px 0;font-size:12px}
+details{margin-top:10px;font-size:13px}summary{cursor:pointer;font-weight:bold;padding:6px 0}
+.savebar{flex-wrap:wrap}
+</style>
+</head>
+<body>
+  <header class="top">
+    <div class="brand"><span class="brandmark">GJ</span><div><h1>Government Job Autofill</h1><p>My personal application profile</p></div></div>
+    <div class="top-actions">
+      <button id="backupBtn" type="button" class="outline">Backup / Import</button>
+    </div>
+  </header>
+  <main>
+    <div class="intro">
+      <h2>Personal Information Profile</h2>
+      <p>Enter your information once. এখানে একবার তথ্য দিন, তারপর "Create Phone Bookmark" চেপে Chrome-এর জন্য বুকমার্ক বানান। তথ্য এই পেজেও নিজে নিজে সেভ থাকে।</p>
+      <div class="notice">বুকমার্কের ভেতরেই আপনার তথ্য থাকবে। Chrome Sync চালু থাকলে সেটি আপনার Google অ্যাকাউন্ট দিয়ে সিঙ্ক হবে। অন্য কাউকে বুকমার্ক বা কোড দেবেন না।<div id="noStore" class="warn" hidden>এই ব্রাউজারে তথ্য স্থায়ীভাবে সেভ হচ্ছে না। কাজ শেষে অবশ্যই Backup / Import থেকে ব্যাকআপ কপি করে রাখুন।</div></div>
+    </div>
+    <form id="profileForm">
+      <section class="panel">
+        <h3>Basic Information <span>মৌলিক তথ্য</span></h3>
+        <div class="grid">
+          <label>Applicant's Name<input name="applicantNameEn" autocomplete="name"></label>
+          <label>আবেদনকারীর নাম (বাংলায়)<input name="applicantNameBn"></label>
+          <label>Father's Name<input name="fatherNameEn"></label>
+          <label>পিতার নাম (বাংলায়)<input name="fatherNameBn"></label>
+          <label>Mother's Name<input name="motherNameEn"></label>
+          <label>মাতার নাম (বাংলায়)<input name="motherNameBn"></label>
+          <label>Date of Birth<input name="dateOfBirth" type="date"></label>
+          <label>Nationality<input name="nationality" value="Bangladeshi"></label>
+          <label>Religion<select name="religion"><option value="">Select</option><option selected>Islam</option><option>Hinduism</option><option>Buddhism</option><option>Christianity</option><option>Other</option></select></label>
+          <label>Gender<select name="gender"><option value="">Select</option><option selected>Male</option><option>Female</option><option>Other</option></select></label>
+          <label>National ID<select name="hasNid"><option value="">Select</option><option value="Yes" selected>Yes</option><option value="No">No</option></select></label>
+          <label>National ID Number<input name="nidNumber" inputmode="numeric"></label>
+          <label>Birth Registration<select name="hasBirthRegistration"><option value="">Select</option><option value="Yes" selected>Yes</option><option value="No">No</option></select></label>
+          <label>Birth Registration Number<input name="birthRegistrationNumber" inputmode="numeric"></label>
+          <label>Passport ID (Optional)<select name="hasPassport"><option value="">Select</option><option value="Yes">Yes</option><option value="No">No</option></select></label>
+          <label>Passport Number<input name="passportNumber"></label>
+          <label>Marital Status<select name="maritalStatus"><option value="">Select</option><option>Single</option><option selected>Married</option><option>Divorced</option><option>Widowed</option></select></label>
+          <label>Spouse Name<input name="spouseName"></label>
+          <label>Mobile Number<input name="mobile" inputmode="tel"></label>
+          <label>Confirm Mobile Number<input name="confirmMobile" inputmode="tel"></label>
+          <label>Email<input name="email" type="email" autocomplete="email"></label>
+          <label>Quota<select name="quota"><option value="">Select</option><option selected>Not Applicable</option><option>Non-Quota</option><option>Freedom Fighter</option><option>Other</option></select></label>
+          <label>Departmental Status<select name="departmentalStatus"><option value="">Select</option><option selected>Not Applicable</option><option>Applicable</option></select></label>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h3>Present Address <span>বর্তমান ঠিকানা</span></h3>
+        <div class="grid">
+          <label>Care Of<input name="presentCareOf"></label>
+          <label>Village / Road / House / Flat<textarea name="presentVillage"></textarea></label>
+          <label>District<input name="presentDistrict" list="districts"></label>
+          <label>Upazila / P.S.<input name="presentUpazila"></label>
+          <label>Post Office<input name="presentPostOffice"></label>
+          <label>Post Code<input name="presentPostCode" inputmode="numeric"></label>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h3>Permanent Address <span>স্থায়ী ঠিকানা</span></h3>
+        <label class="check"><input type="checkbox" id="sameAddress"> Same as Present Address</label>
+        <div class="grid">
+          <label>Care Of<input name="permanentCareOf"></label>
+          <label>Village / Road / House / Flat<textarea name="permanentVillage"></textarea></label>
+          <label>District<input name="permanentDistrict" list="districts"></label>
+          <label>Upazila / P.S.<input name="permanentUpazila"></label>
+          <label>Post Office<input name="permanentPostOffice"></label>
+          <label>Post Code<input name="permanentPostCode" inputmode="numeric"></label>
+        </div>
+      </section>
+
+      <datalist id="districts">
+        <option>Dhaka</option><option>Gazipur</option><option>Narayanganj</option><option>Chattogram</option><option>Rajshahi</option><option>Khulna</option><option>Barishal</option><option>Sylhet</option><option>Rangpur</option><option>Mymensingh</option>
+      </datalist>
+
+      <section class="panel">
+        <h3>SSC / Equivalent Level <span>এসএসসি / সমমান</span></h3>
+        <div class="grid">
+          <label>Examination<input name="sscExamination" value="SSC"></label>
+          <label>Board<input name="sscBoard"></label>
+          <label>Roll No<input name="sscRoll"></label>
+          <label>Result Type<select name="sscResultType"><option value="">Select</option><option>GPA(out of 5)</option><option>GPA(out of 4)</option><option>1st Division</option><option>2nd Division</option><option>3rd Division</option><option>Passed</option></select></label>
+          <label>Result Value / GPA<input name="sscResult"></label>
+          <label>Group / Subject<input name="sscGroup"></label>
+          <label>Passing Year<input name="sscYear" inputmode="numeric"></label>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h3>HSC / Equivalent Level <span>এইচএসসি / সমমান</span></h3>
+        <div class="grid">
+          <label>Examination<input name="hscExamination" value="HSC"></label>
+          <label>Board<input name="hscBoard"></label>
+          <label>Roll No<input name="hscRoll"></label>
+          <label>Result Type<select name="hscResultType"><option value="">Select</option><option>GPA(out of 5)</option><option>GPA(out of 4)</option><option>1st Division</option><option>2nd Division</option><option>3rd Division</option><option>Passed</option></select></label>
+          <label>Result Value / GPA<input name="hscResult"></label>
+          <label>Group / Subject<input name="hscGroup"></label>
+          <label>Passing Year<input name="hscYear" inputmode="numeric"></label>
+        </div>
+      </section>
+
+      <section class="panel optional">
+        <h3>Graduation / Equivalent Level <span>স্নাতক / সমমান</span></h3>
+        <label class="check"><input type="checkbox" name="graduationApplicable" id="graduationApplicable"> If Applicable</label>
+        <div class="grid optional-fields" id="graduationFields">
+          <label>Examination<input name="graduationExamination"></label>
+          <label>Subject / Degree<input name="graduationDegree"></label>
+          <label>University / Institute<input name="graduationUniversity"></label>
+          <label>Result Type<select name="graduationResultType"><option value="">Select</option><option>CGPA(out of 4)</option><option>CGPA(out of 5)</option><option>GPA(out of 4)</option><option>GPA(out of 5)</option><option>1st Division</option><option>2nd Division</option><option>3rd Division</option><option>Passed</option></select></label>
+          <label>Result Value / CGPA<input name="graduationResult"></label>
+          <label>Passing Year<input name="graduationYear"></label>
+          <label>Course Duration<input name="graduationDuration"></label>
+        </div>
+      </section>
+
+      <section class="panel optional">
+        <h3>Masters / Equivalent Level <span>স্নাতকোত্তর / সমমান</span></h3>
+        <label class="check"><input type="checkbox" name="mastersApplicable" id="mastersApplicable"> If Applicable</label>
+        <div class="grid optional-fields" id="mastersFields">
+          <label>Examination<input name="mastersExamination"></label>
+          <label>Subject / Degree<input name="mastersDegree"></label>
+          <label>University / Institute<input name="mastersUniversity"></label>
+          <label>Result Type<select name="mastersResultType"><option value="">Select</option><option>CGPA(out of 4)</option><option>CGPA(out of 5)</option><option>GPA(out of 4)</option><option>GPA(out of 5)</option><option>1st Division</option><option>2nd Division</option><option>3rd Division</option><option>Passed</option></select></label>
+          <label>Result Value / CGPA<input name="mastersResult"></label>
+          <label>Passing Year<input name="mastersYear"></label>
+          <label>Course Duration<input name="mastersDuration"></label>
+        </div>
+      </section>
+
+      <div class="savebar">
+        <button type="submit" class="primary">Save My Profile</button>
+        <button type="button" id="makeBtn" class="alt">Create Phone Bookmark</button>
+        <button type="button" id="clearBtn" class="danger">Clear Profile</button>
+        <span id="saveStatus" role="status"></span>
+      </div>
+    </form>
+
+    <section class="panel" id="bookmarkPanel">
+      <h3>Phone Bookmark <span>ফোনের বুকমার্ক</span></h3>
+      <p class="hint">আপনার Chrome-এ বড় বুকমার্ক চলে না। তাই ফিল-ইঞ্জিন একবার GitHub-এ রাখতে হবে (ফ্রি, এতে কোনো ব্যক্তিগত তথ্য নেই)। বুকমার্কে শুধু আপনার তথ্য আর ছোট লোডার থাকবে।</p>
+      <details><summary>ধাপ ১: ইঞ্জিন GitHub-এ রাখা (শুধু যে ইঞ্জিন বানাচ্ছে তার জন্য, বন্ধু এটা বাদ দেবে)</summary>
+      <ol class="steps">
+        <li>নিচের <b>Copy engine</b> চাপুন।</li>
+        <li>github.com-এ লগইন করে নতুন <b>Public</b> repository বানান (নাম যেমন <b>gj-engine</b>)।</li>
+        <li>Add file → Create new file → নাম <b>gj.js</b> → কপি করা লেখা পেস্ট → Commit changes।</li>
+      </ol>
+      <textarea id="engineText" class="code" readonly></textarea>
+      <div class="btnrow"><button type="button" id="copyEngine" class="outline">Copy engine</button><span id="engineMsg" class="info"></span></div>
+      </details>
+      <h4 style="margin:14px 0 6px">ধাপ ২: ইঞ্জিনের লিংক (দেওয়া আছে, বদলাতে হবে না)</h4>
+      <input id="engineUrl" inputmode="url" placeholder="https://cdn.jsdelivr.net/gh/ইউজারনেম/gj-engine@main/gj.js">
+      <p class="hint">ইউজারনেম আর repo-র নাম নিজেরটা বসান। একবার দিলেই সেভ থাকবে।</p>
+      <h4 style="margin:14px 0 6px">ধাপ ৩: বুকমার্ক কোড</h4>
+      <p class="hint">উপরে তথ্য দিয়ে "Create Phone Bookmark" চাপুন। কোড তৈরি হবে।</p>
+      <textarea id="codeText" class="code" readonly placeholder="javascript:..."></textarea>
+      <div class="btnrow"><button type="button" id="copyCode" class="primary">Copy code</button><span id="codeInfo" class="info"></span><span id="copyMsg" class="info"></span></div>
+      <ol class="steps">
+        <li>Chrome-এ যেকোনো পেজ ⋮ মেনু থেকে ☆ দিয়ে বুকমার্ক করুন।</li>
+        <li>⋮ → Bookmarks → ওই বুকমার্ক → Edit। <b>Name:</b> AF &nbsp; <b>URL:</b> পুরোনোটা মুছে কোডটা Paste করুন → Save।</li>
+        <li>সরকারি ফর্ম খুলে অ্যাড্রেস বারে <b>AF</b> লিখুন, সাজেশনে বুকমার্ক-আইকনওয়ালা AF-এ ট্যাপ করুন।</li>
+        <li>নিচে আসা প্যানেলে <b>Autofill</b> চাপুন। তথ্য বদলালে নতুন কোড বানিয়ে বুকমার্কের URL বদলান। ইঞ্জিন আর বদলাতে হবে না।</li>
+      </ol>
+      <details><summary>ছোট টেস্ট ও সাইজ টেস্ট</summary>
+        <textarea id="testText" class="code" readonly></textarea>
+        <div class="btnrow"><button type="button" id="copyTest" class="outline">Copy test code</button></div>
+        <div class="btnrow"><button type="button" class="outline sz" data-kb="4">4 KB</button><button type="button" class="outline sz" data-kb="6">6 KB</button><button type="button" class="outline sz" data-kb="8">8 KB</button></div>
+      </details>
+    </section>
+    <section class="panel" id="backupPanel">
+      <h3>Backup / Import <span>ব্যাকআপ</span></h3>
+      <p class="hint">ব্যাকআপ (নিচের লেখা কপি করে কোথাও রাখুন):</p>
+      <textarea id="backupText" class="code" readonly></textarea>
+      <div class="btnrow"><button type="button" id="copyBackup" class="outline">Copy backup</button>
+      <button type="button" id="dlBackup" class="primary">Download backup file</button><span id="backupMsg" class="info"></span></div>
+      <p class="hint">ইমপোর্ট: আগের Export backup JSON, বা আগের বুকমার্ক-কোড এখানে পেস্ট করুন, অথবা ফাইল বেছে নিন।</p>
+      <textarea id="importText" class="code" placeholder="{...} অথবা javascript:..."></textarea>
+      <div class="btnrow"><button type="button" id="importBtn" class="primary">Import pasted text</button>
+      <label class="outline file-label">Choose JSON file<input id="importFile" type="file" accept="application/json,.json,text/plain"></label></div>
+    </section>
+    <footer>Government Job Autofill · Mobile bookmark edition (based on extension v1.3)</footer>
+  </main>
+  <script>
+const __mem = {};
+const store = {
+  async get(k) { try { const v = localStorage.getItem("gja_" + k); if (v) return {[k]: JSON.parse(v)}; } catch (_) {} return (k in __mem) ? {[k]: __mem[k]} : {}; },
+  async set(o) { for (const k in o) { __mem[k] = o[k]; try { localStorage.setItem("gja_" + k, JSON.stringify(o[k])); } catch (_) { document.getElementById("noStore").hidden = false; } } },
+  async remove(k) { delete __mem[k]; try { localStorage.removeItem("gja_" + k); } catch (_) {} }
+};
+const form = document.getElementById("profileForm");
+const statusEl = document.getElementById("saveStatus");
+const graduationToggle = document.getElementById("graduationApplicable");
+const mastersToggle = document.getElementById("mastersApplicable");
+
+function setOptionalState(toggle, box) {
+  box.classList.toggle("disabled", !toggle.checked);
+  box.querySelectorAll("input,select,textarea").forEach(el => el.disabled = !toggle.checked);
+}
+graduationToggle.addEventListener("change", () => setOptionalState(graduationToggle, document.getElementById("graduationFields")));
+mastersToggle.addEventListener("change", () => setOptionalState(mastersToggle, document.getElementById("mastersFields")));
+
+document.getElementById("sameAddress").addEventListener("change", e => {
+  if (!e.target.checked) return;
+  const pairs = ["CareOf","Village","District","Upazila","PostOffice","PostCode"];
+  pairs.forEach(suffix => {
+    const a = form.elements["present"+suffix], b = form.elements["permanent"+suffix];
+    if (a && b) b.value = a.value;
+  });
+});
+form.addEventListener("input", e => {
+  if (e.target.name && e.target.name.startsWith("present")) {
+    const suffix = e.target.name.slice(7);
+    const same = document.getElementById("sameAddress").checked;
+    const dest = form.elements["permanent"+suffix];
+    if (same && dest) dest.value = e.target.value;
+  }
+});
+
+async function loadProfile() {
+  const {profile = {}} = await store.get("profile");
+  for (const el of form.elements) {
+    if (!el.name) continue;
+    if (el.type === "checkbox") el.checked = !!profile[el.name];
+    else if (profile[el.name] !== undefined) el.value = profile[el.name];
+  }
+  setOptionalState(graduationToggle, document.getElementById("graduationFields"));
+  setOptionalState(mastersToggle, document.getElementById("mastersFields"));
+}
+form.addEventListener("submit", async e => {
+  e.preventDefault();
+  const saveButton = form.querySelector('button[type="submit"]');
+  const originalText = saveButton.textContent;
+  saveButton.disabled = true;
+  saveButton.textContent = "Saving...";
+  statusEl.className = "saving";
+  statusEl.textContent = "Saving your profile...";
+  try {
+    const profile = {};
+    for (const el of form.elements) {
+      if (!el.name) continue;
+      profile[el.name] = el.type === "checkbox" ? el.checked : (el.value || "").trim();
+    }
+    await store.set({profile});
+    const check = await store.get("profile");
+    if (!check.profile || Object.keys(profile).some(k => check.profile[k] !== profile[k])) {
+      throw new Error("Saved data could not be verified. Please try again.");
+    }
+    const count = Object.values(profile).filter(v => v !== "" && v !== false && v !== null && v !== undefined).length;
+    statusEl.className = "saved";
+    statusEl.textContent = `✓ Profile saved successfully · ${count} values stored in this browser.`;
+  } catch (err) {
+    statusEl.className = "save-error";
+    statusEl.textContent = "Save failed: " + (err.message || String(err));
+  } finally {
+    saveButton.disabled = false;
+    saveButton.textContent = originalText;
+  }
+});
+document.getElementById("clearBtn").addEventListener("click", async () => {
+  if (!confirm("Clear all saved profile information from this browser? Export a backup first if needed.")) return;
+  await store.remove("profile");
+  form.reset();
+  setOptionalState(graduationToggle, document.getElementById("graduationFields"));
+  setOptionalState(mastersToggle, document.getElementById("mastersFields"));
+  statusEl.textContent = "Profile cleared.";
+});
+
+const ENGINE = "(function(P){(()=>{const k=document.getElementById(\"gja-host\");k&&k.remove();let y=null,E=new WeakMap;const q={applicantNameEn:[\"applicant's name\",\"applicants name\",\"applicant name\",\"name of applicant\"],applicantNameBn:[\"\\u0986\\u09AC\\u09C7\\u09A6\\u09A8\\u0995\\u09BE\\u09B0\\u09C0\\u09B0 \\u09A8\\u09BE\\u09AE (\\u09AC\\u09BE\\u0982\\u09B2\\u09BE\\u09AF\\u09BC)\",\"\\u0986\\u09AC\\u09C7\\u09A6\\u09A8\\u0995\\u09BE\\u09B0\\u09C0\\u09B0 \\u09A8\\u09BE\\u09AE \\u09AC\\u09BE\\u0982\\u09B2\\u09BE\\u09AF\\u09BC\",\"\\u0986\\u09AC\\u09C7\\u09A6\\u09A8\\u0995\\u09BE\\u09B0\\u09C0\\u09B0 \\u09A8\\u09BE\\u09AE (\\u09AC\\u09BE\\u0982\\u09B2\\u09BE)\"],fatherNameEn:[\"father's name\",\"fathers name\",\"father name\"],fatherNameBn:[\"\\u09AA\\u09BF\\u09A4\\u09BE\\u09B0 \\u09A8\\u09BE\\u09AE (\\u09AC\\u09BE\\u0982\\u09B2\\u09BE\\u09AF\\u09BC)\",\"\\u09AA\\u09BF\\u09A4\\u09BE\\u09B0 \\u09A8\\u09BE\\u09AE \\u09AC\\u09BE\\u0982\\u09B2\\u09BE\\u09AF\\u09BC\",\"\\u09AA\\u09BF\\u09A4\\u09BE\\u09B0 \\u09A8\\u09BE\\u09AE (\\u09AC\\u09BE\\u0982\\u09B2\\u09BE)\"],motherNameEn:[\"mother's name\",\"mothers name\",\"mother name\"],motherNameBn:[\"\\u09AE\\u09BE\\u09A4\\u09BE\\u09B0 \\u09A8\\u09BE\\u09AE (\\u09AC\\u09BE\\u0982\\u09B2\\u09BE\\u09AF\\u09BC)\",\"\\u09AE\\u09BE\\u09A4\\u09BE\\u09B0 \\u09A8\\u09BE\\u09AE \\u09AC\\u09BE\\u0982\\u09B2\\u09BE\\u09AF\\u09BC\",\"\\u09AE\\u09BE\\u09A4\\u09BE\\u09B0 \\u09A8\\u09BE\\u09AE (\\u09AC\\u09BE\\u0982\\u09B2\\u09BE)\"],dateOfBirth:[\"date of birth\",\"birth date\",\"\\u099C\\u09A8\\u09CD\\u09AE \\u09A4\\u09BE\\u09B0\\u09BF\\u0996\",\"\\u099C\\u09A8\\u09CD\\u09AE\\u09A4\\u09BE\\u09B0\\u09BF\\u0996\"],nationality:[\"nationality\",\"\\u099C\\u09BE\\u09A4\\u09C0\\u09AF\\u09BC\\u09A4\\u09BE\"],religion:[\"religion\",\"\\u09A7\\u09B0\\u09CD\\u09AE\"],gender:[\"gender\",\"\\u09B2\\u09BF\\u0999\\u09CD\\u0997\"],hasNid:[\"national id\",\"national identification\",\"nid\",\"\\u099C\\u09BE\\u09A4\\u09C0\\u09AF\\u09BC \\u09AA\\u09B0\\u09BF\\u099A\\u09AF\\u09BC\\u09AA\\u09A4\\u09CD\\u09B0\"],nidNumber:[\"national id number\",\"nid number\",\"nid no\",\"national id no\",\"\\u099C\\u09BE\\u09A4\\u09C0\\u09AF\\u09BC \\u09AA\\u09B0\\u09BF\\u099A\\u09AF\\u09BC\\u09AA\\u09A4\\u09CD\\u09B0 \\u09A8\\u09AE\\u09CD\\u09AC\\u09B0\"],hasBirthRegistration:[\"birth registration\",\"birth registration certificate\",\"\\u099C\\u09A8\\u09CD\\u09AE \\u09A8\\u09BF\\u09AC\\u09A8\\u09CD\\u09A7\\u09A8\"],birthRegistrationNumber:[\"birth registration number\",\"birth registration no\",\"brn\",\"\\u099C\\u09A8\\u09CD\\u09AE \\u09A8\\u09BF\\u09AC\\u09A8\\u09CD\\u09A7\\u09A8 \\u09A8\\u09AE\\u09CD\\u09AC\\u09B0\"],hasPassport:[\"passport id\",\"passport\",\"\\u09AA\\u09BE\\u09B8\\u09AA\\u09CB\\u09B0\\u09CD\\u099F\"],passportNumber:[\"passport number\",\"passport no\",\"\\u09AA\\u09BE\\u09B8\\u09AA\\u09CB\\u09B0\\u09CD\\u099F \\u09A8\\u09AE\\u09CD\\u09AC\\u09B0\"],maritalStatus:[\"marital status\",\"\\u09AC\\u09C8\\u09AC\\u09BE\\u09B9\\u09BF\\u0995 \\u0985\\u09AC\\u09B8\\u09CD\\u09A5\\u09BE\"],spouseName:[\"spouse name\",\"husband name\",\"wife name\",\"\\u09B8\\u09CD\\u09AC\\u09BE\\u09AE\\u09C0/\\u09B8\\u09CD\\u09A4\\u09CD\\u09B0\\u09C0\\u09B0 \\u09A8\\u09BE\\u09AE\",\"\\u09B8\\u09CD\\u09AC\\u09BE\\u09AE\\u09C0\\u09B0 \\u09A8\\u09BE\\u09AE\",\"\\u09B8\\u09CD\\u09A4\\u09CD\\u09B0\\u09C0\\u09B0 \\u09A8\\u09BE\\u09AE\"],mobile:[\"mobile number\",\"mobile no\",\"phone number\",\"\\u09AE\\u09CB\\u09AC\\u09BE\\u0987\\u09B2 \\u09A8\\u09AE\\u09CD\\u09AC\\u09B0\"],confirmMobile:[\"confirm mobile number\",\"confirm mobile\",\"\\u09AE\\u09CB\\u09AC\\u09BE\\u0987\\u09B2 \\u09A8\\u09AE\\u09CD\\u09AC\\u09B0 \\u09A8\\u09BF\\u09B6\\u09CD\\u099A\\u09BF\\u09A4 \\u0995\\u09B0\\u09C1\\u09A8\"],email:[\"email\",\"email address\",\"\\u0987\\u09AE\\u09C7\\u0987\\u09B2\"],quota:[\"quota\",\"\\u0995\\u09CB\\u099F\\u09BE\"],departmentalStatus:[\"departmental status\",\"\\u09A6\\u09BE\\u09AA\\u09CD\\u09A4\\u09B0\\u09BF\\u0995 \\u0985\\u09AC\\u09B8\\u09CD\\u09A5\\u09BE\",\"\\u09AC\\u09BF\\u09AD\\u09BE\\u0997\\u09C0\\u09AF\\u09BC \\u09AA\\u09CD\\u09B0\\u09BE\\u09B0\\u09CD\\u09A5\\u09C0\"],presentCareOf:[\"care of\",\"careof\",\"\\u09AF\\u09A4\\u09CD\\u09A8\\u09C7\"],presentVillage:[\"village road house flat\",\"village/road/house/flat\",\"village\",\"road\",\"house/flat\",\"\\u0997\\u09CD\\u09B0\\u09BE\\u09AE/\\u09B0\\u09BE\\u09B8\\u09CD\\u09A4\\u09BE/\\u09AC\\u09BE\\u09A1\\u09BC\\u09BF\"],presentDistrict:[\"district\",\"\\u099C\\u09C7\\u09B2\\u09BE\"],presentUpazila:[\"upazila/p.s.\",\"upazila\",\"\\u09AA\\u09C1\\u09B2\\u09BF\\u09B6 \\u09B8\\u09CD\\u099F\\u09C7\\u09B6\\u09A8\",\"\\u0989\\u09AA\\u099C\\u09C7\\u09B2\\u09BE\"],presentPostOffice:[\"post office\",\"\\u09A1\\u09BE\\u0995\\u0998\\u09B0\"],presentPostCode:[\"post code\",\"postal code\",\"postcode\",\"\\u09AA\\u09CB\\u09B8\\u09CD\\u099F \\u0995\\u09CB\\u09A1\"],permanentCareOf:[\"care of\",\"careof\",\"\\u09AF\\u09A4\\u09CD\\u09A8\\u09C7\"],permanentVillage:[\"village road house flat\",\"village/road/house/flat\",\"village\",\"road\",\"house/flat\",\"\\u0997\\u09CD\\u09B0\\u09BE\\u09AE/\\u09B0\\u09BE\\u09B8\\u09CD\\u09A4\\u09BE/\\u09AC\\u09BE\\u09A1\\u09BC\\u09BF\"],permanentDistrict:[\"district\",\"\\u099C\\u09C7\\u09B2\\u09BE\"],permanentUpazila:[\"upazila/p.s.\",\"upazila\",\"\\u09AA\\u09C1\\u09B2\\u09BF\\u09B6 \\u09B8\\u09CD\\u099F\\u09C7\\u09B6\\u09A8\",\"\\u0989\\u09AA\\u099C\\u09C7\\u09B2\\u09BE\"],permanentPostOffice:[\"post office\",\"\\u09A1\\u09BE\\u0995\\u0998\\u09B0\"],permanentPostCode:[\"post code\",\"postal code\",\"postcode\",\"\\u09AA\\u09CB\\u09B8\\u09CD\\u099F \\u0995\\u09CB\\u09A1\"],sscExamination:[\"examination\",\"exam\"],sscBoard:[\"board\",\"\\u09AC\\u09CB\\u09B0\\u09CD\\u09A1\"],sscRoll:[\"roll no\",\"roll number\",\"roll\",\"\\u09B0\\u09CB\\u09B2\"],sscResultType:[\"result\",\"result type\",\"gpa\",\"\\u099C\\u09BF\\u09AA\\u09BF\\u098F\",\"\\u09AB\\u09B2\\u09BE\\u09AB\\u09B2\"],sscResult:[\"result value\",\"gpa value\",\"cgpa value\",\"\\u099C\\u09BF\\u09AA\\u09BF\\u098F \\u09AE\\u09BE\\u09A8\"],sscGroup:[\"group/subject\",\"group\",\"subject\",\"\\u09AC\\u09BF\\u09AD\\u09BE\\u0997\",\"\\u0997\\u09CD\\u09B0\\u09C1\\u09AA\"],sscYear:[\"passing year\",\"year of passing\",\"\\u09AA\\u09BE\\u09B8\\u09C7\\u09B0 \\u09AC\\u099B\\u09B0\"],hscExamination:[\"examination\",\"exam\"],hscBoard:[\"board\",\"\\u09AC\\u09CB\\u09B0\\u09CD\\u09A1\"],hscRoll:[\"roll no\",\"roll number\",\"roll\",\"\\u09B0\\u09CB\\u09B2\"],hscResultType:[\"result\",\"result type\",\"gpa\",\"\\u099C\\u09BF\\u09AA\\u09BF\\u098F\",\"\\u09AB\\u09B2\\u09BE\\u09AB\\u09B2\"],hscResult:[\"result value\",\"gpa value\",\"cgpa value\",\"\\u099C\\u09BF\\u09AA\\u09BF\\u098F \\u09AE\\u09BE\\u09A8\"],hscGroup:[\"group/subject\",\"group\",\"subject\",\"\\u09AC\\u09BF\\u09AD\\u09BE\\u0997\",\"\\u0997\\u09CD\\u09B0\\u09C1\\u09AA\"],hscYear:[\"passing year\",\"year of passing\",\"\\u09AA\\u09BE\\u09B8\\u09C7\\u09B0 \\u09AC\\u099B\\u09B0\"],graduationExamination:[\"examination\",\"exam\"],graduationDegree:[\"subject/degree\",\"degree\",\"subject\",\"\\u09A1\\u09BF\\u0997\\u09CD\\u09B0\\u09BF\"],graduationUniversity:[\"university/inst.\",\"university/institute\",\"university\",\"institute\",\"\\u09AC\\u09BF\\u09B6\\u09CD\\u09AC\\u09AC\\u09BF\\u09A6\\u09CD\\u09AF\\u09BE\\u09B2\\u09AF\\u09BC\"],graduationResultType:[\"result\",\"result type\",\"gpa\",\"cgpa\",\"\\u09AB\\u09B2\\u09BE\\u09AB\\u09B2\"],graduationResult:[\"result value\",\"gpa value\",\"cgpa value\",\"\\u09AB\\u09B2\\u09BE\\u09AB\\u09B2 \\u09AE\\u09BE\\u09A8\"],graduationYear:[\"passing year\",\"year of passing\",\"\\u09AA\\u09BE\\u09B8\\u09C7\\u09B0 \\u09AC\\u099B\\u09B0\"],graduationDuration:[\"course duration\",\"duration\",\"\\u0995\\u09CB\\u09B0\\u09CD\\u09B8\\u09C7\\u09B0 \\u09AE\\u09C7\\u09AF\\u09BC\\u09BE\\u09A6\"],mastersExamination:[\"examination\",\"exam\"],mastersDegree:[\"subject/degree\",\"degree\",\"subject\",\"\\u09A1\\u09BF\\u0997\\u09CD\\u09B0\\u09BF\"],mastersUniversity:[\"university/inst.\",\"university/institute\",\"university\",\"institute\",\"\\u09AC\\u09BF\\u09B6\\u09CD\\u09AC\\u09AC\\u09BF\\u09A6\\u09CD\\u09AF\\u09BE\\u09B2\\u09AF\\u09BC\"],mastersResultType:[\"result\",\"result type\",\"gpa\",\"cgpa\",\"\\u09AB\\u09B2\\u09BE\\u09AB\\u09B2\"],mastersResult:[\"result value\",\"gpa value\",\"cgpa value\",\"\\u09AB\\u09B2\\u09BE\\u09AB\\u09B2 \\u09AE\\u09BE\\u09A8\"],mastersYear:[\"passing year\",\"year of passing\",\"\\u09AA\\u09BE\\u09B8\\u09C7\\u09B0 \\u09AC\\u099B\\u09B0\"],mastersDuration:[\"course duration\",\"duration\",\"\\u0995\\u09CB\\u09B0\\u09CD\\u09B8\\u09C7\\u09B0 \\u09AE\\u09C7\\u09AF\\u09BC\\u09BE\\u09A6\"]},V={ssc:[\"ssc\",\"secondary school\",\"\\u098F\\u09B8\\u098F\\u09B8\\u09B8\\u09BF\"],hsc:[\"hsc\",\"higher secondary\",\"\\u098F\\u0987\\u099A\\u098F\\u09B8\\u09B8\\u09BF\"],graduation:[\"graduation\",\"bachelor\",\"honours\",\"honors\",\"\\u09B8\\u09CD\\u09A8\\u09BE\\u09A4\\u0995\"],masters:[\"masters\",\"master's\",\"\\u09B8\\u09CD\\u09A8\\u09BE\\u09A4\\u0995\\u09CB\\u09A4\\u09CD\\u09A4\\u09B0\"]},o=u=>(u||\"\").toString().toLowerCase().replace(/[\\u2019']/g,\"\").replace(/[()]/g,\" \").replace(/[\\u0964:\\uff1a]/g,\" \").replace(/[\\/_-]/g,\" \").replace(/\\s+/g,\" \").trim();function M(u){if(!u||u.disabled||u.type===\"hidden\")return!1;const e=u.getBoundingClientRect(),n=getComputedStyle(u);return e.width>0&&e.height>0&&n.visibility!==\"hidden\"&&n.display!==\"none\"}function A(u){const e=[];u.labels&&[...u.labels].forEach(a=>e.push(a.innerText||a.textContent));const n=u.id;if(n){const a=document.querySelector(`label[for=\"${CSS.escape(n)}\"]`);a&&e.push(a.innerText||a.textContent)}e.push(u.getAttribute(\"aria-label\"),u.getAttribute(\"placeholder\"),u.getAttribute(\"name\"),u.id,u.getAttribute(\"title\"));let t=u.parentElement;for(let a=0;t&&a<3;a++,t=t.parentElement){const i=(t.innerText||\"\").trim();i&&i.length<220&&e.push(i)}return o(e.filter(Boolean).join(\" | \"))}function B(u){const e=[[\"ssc\",/\\bssc\\b|secondary school/],[\"hsc\",/\\bhsc\\b|higher secondary/],[\"graduation\",/graduation|bachelor|honours|honors/],[\"masters\",/masters|master s|postgraduate/]];for(let t=u;t&&t!==document.body;t=t.parentElement){const a=[];if(t.tagName===\"FIELDSET\"){const i=t.querySelector(\":scope > legend\");i&&a.push(i.innerText||i.textContent||\"\")}for(const i of[\":scope > legend\",\":scope > h1\",\":scope > h2\",\":scope > h3\",\":scope > h4\",\":scope > .section-title\",\":scope > .panel-title\",\":scope > .section-header\",\":scope > .title\"])try{const s=t.querySelector(i);s&&a.push(s.innerText||s.textContent||\"\")}catch(s){}for(const i of a){const s=o(i);for(const[b,d]of e)if(d.test(s))return b}}let n=null;if(!y){y=[];for(const t of document.querySelectorAll(\"div,span,strong,b,p,legend,h1,h2,h3,h4\")){if((t.textContent||\"\").length>400)continue;const a=(t.innerText||t.textContent||\"\").trim();if(!a||a.length>90)continue;const i=o(a);let s=\"\";for(const[b,d]of e)if(d.test(i)&&/(equivalent level|level|ssc|hsc|graduation|masters|secondary|bachelor|honours|honors)/.test(i)){s=b;break}s&&y.push([t,s])}}for(const[t,a]of y)t===u||t.contains(u)||t.compareDocumentPosition(u)&Node.DOCUMENT_POSITION_FOLLOWING&&(n=a);if(n)return n;for(let t=u.parentElement;t&&t!==document.body;t=t.parentElement){const a=o(t.innerText||\"\");if(!a||a.length>900)continue;const i=e.filter(([,s])=>s.test(a));if(i.length===1)return i[0][0]}return\"\"}function z(u){let e=u;for(let n=0;e&&n<6;n++,e=e.parentElement){const t=o(e.innerText||\"\");if(t.includes(\"permanent address\")||t.includes(\"\\u09B8\\u09CD\\u09A5\\u09BE\\u09AF\\u09BC\\u09C0 \\u09A0\\u09BF\\u0995\\u09BE\\u09A8\\u09BE\"))return\"permanent\";if(t.includes(\"present address\")||t.includes(\"\\u09AC\\u09B0\\u09CD\\u09A4\\u09AE\\u09BE\\u09A8 \\u09A0\\u09BF\\u0995\\u09BE\\u09A8\\u09BE\"))return\"present\"}return\"\"}function x(){return y=null,E=new WeakMap,[...document.querySelectorAll(\"input,select,textarea\")].filter(M)}function W(u){const e=[];if(u.labels&&[...u.labels].forEach(a=>e.push(a.innerText||a.textContent)),u.id){const a=document.querySelector(`label[for=\"${CSS.escape(u.id)}\"]`);a&&e.push(a.innerText||a.textContent)}for(const a of[\"aria-label\",\"placeholder\",\"name\",\"id\",\"title\"]){const i=u.getAttribute(a);i&&e.push(i)}const n=u.closest(\"td\");n&&n.previousElementSibling&&e.push(n.previousElementSibling.innerText||\"\");const t=u.closest(\"tr\");if(t){const a=[...t.children],i=a.findIndex(s=>s.contains(u));i>0&&e.push(a[i-1].innerText||\"\")}return o(e.filter(Boolean).join(\" | \"))}function v(u){if(E.has(u))return E.get(u);const e=I(u);return E.set(u,e),e}function I(u){const e=W(u),n=A(u),t=o([e,n].filter(Boolean).join(\" | \")),a=e||n,i=u.tagName.toLowerCase();if((u.type||i).toLowerCase()===\"checkbox\"){if(t.includes(\"same as present\"))return\"sameAddressCheckbox\";if(t.includes(\"if applicable\")){const c=B(u);return c?c+\"ApplicableCheckbox\":\"\"}}const b=z(u),d=B(u),l=Object.entries(q).filter(([c])=>!(b&&c.startsWith(\"present\")&&b!==\"present\"||b&&c.startsWith(\"permanent\")&&b!==\"permanent\"||!b&&(c.startsWith(\"present\")||c.startsWith(\"permanent\"))||d&&/^(ssc|hsc|graduation|masters)/.test(c)&&!c.startsWith(d)));if(/(national id number|nid number|nid no|national id no|\\u099c\\u09be\\u09a4\\u09c0\\u09af\\u09bc \\u09aa\\u09b0\\u09bf\\u099a\\u09af\\u09bc\\u09aa\\u09a4\\u09cd\\u09b0 \\u09a8\\u09ae\\u09cd\\u09ac\\u09b0)/.test(t))return\"nidNumber\";if(/(birth registration number|birth registration no|birth reg no|breg no|brn|\\u099c\\u09a8\\u09cd\\u09ae \\u09a8\\u09bf\\u09ac\\u09a8\\u09cd\\u09a7\\u09a8 \\u09a8\\u09ae\\u09cd\\u09ac\\u09b0)/.test(t))return\"birthRegistrationNumber\";if(/(passport number|passport no|\\u09aa\\u09be\\u09b8\\u09aa\\u09cb\\u09b0\\u09cd\\u099f \\u09a8\\u09ae\\u09cd\\u09ac\\u09b0)/.test(t))return\"passportNumber\";if(i===\"select\"&&/national id|national identification|\\bnid\\b|\\u099c\\u09be\\u09a4\\u09c0\\u09af\\u09bc \\u09aa\\u09b0\\u09bf\\u099a\\u09af\\u09bc\\u09aa\\u09a4\\u09cd\\u09b0/.test(t))return\"hasNid\";if(i===\"select\"&&/birth registration|\\bbreg\\b|\\u099c\\u09a8\\u09cd\\u09ae \\u09a8\\u09bf\\u09ac\\u09a8\\u09cd\\u09a7\\u09a8/.test(t))return\"hasBirthRegistration\";if(i===\"select\"&&/passport id|passport|\\u09aa\\u09be\\u09b8\\u09aa\\u09cb\\u09b0\\u09cd\\u099f/.test(t))return\"hasPassport\";if(d&&[\"ssc\",\"hsc\",\"graduation\",\"masters\"].includes(d)&&/\\bresult\\b|\\bgpa\\b|\\bcgpa\\b|\\u09ab\\u09b2\\u09be\\u09ab\\u09b2/.test(t)){if(i===\"select\")return d+\"ResultType\";if(i===\"input\"||i===\"textarea\")return d+\"Result\"}for(const[c,r]of l)for(const f of r){const p=o(f);if(e===p||e.split(\" | \").some(N=>N===p)){if(c===\"hasBirthRegistration\"&&i!==\"select\"||c===\"hasNid\"&&i!==\"select\"||c===\"hasPassport\"&&i!==\"select\")continue;return c}}if(t.includes(\"confirm mobile\"))return\"confirmMobile\";if(/quota|\\u0995\\u09cb\\u099f\\u09be/.test(t))return\"quota\";if(t.includes(\"departmental status\"))return\"departmentalStatus\";for(const[c,r]of l)if(![\"gender\",\"mobile\",\"confirmMobile\",\"quota\",\"hasNid\",\"nidNumber\",\"hasBirthRegistration\",\"birthRegistrationNumber\",\"hasPassport\",\"passportNumber\",\"sscResult\",\"sscResultType\",\"hscResult\",\"hscResultType\",\"graduationResult\",\"graduationResultType\",\"mastersResult\",\"mastersResultType\"].includes(c))for(const f of r){const p=o(f);if(n.includes(p))return c}return\"\"}function $(u,e){var n;return e===\"confirmMobile\"?u.confirmMobile||u.mobile||\"\":e===\"hasNid\"||e===\"hasBirthRegistration\"||e===\"hasPassport\"?u[e]||\"\":e===\"nidNumber\"&&o(u.hasNid)!==\"yes\"||e===\"birthRegistrationNumber\"&&o(u.hasBirthRegistration)!==\"yes\"||e===\"passportNumber\"&&o(u.hasPassport)!==\"yes\"?\"\":(n=u[e])!=null?n:\"\"}function j(u,e){var i;const n=String(e!=null?e:\"\");if(u instanceof HTMLInputElement&&(u.type===\"date\"&&!/^\\d{4}-\\d{2}-\\d{2}$/.test(n)||u.type===\"number\"&&n!==\"\"&&!Number.isFinite(Number(n))))return!1;const t=u.tagName===\"TEXTAREA\"?HTMLTextAreaElement.prototype:u.tagName===\"SELECT\"?HTMLSelectElement.prototype:HTMLInputElement.prototype,a=(i=Object.getOwnPropertyDescriptor(t,\"value\"))==null?void 0:i.set;try{a?a.call(u,n):u.value=n}catch(s){return!1}return u.dispatchEvent(new Event(\"input\",{bubbles:!0})),u.dispatchEvent(new Event(\"change\",{bubbles:!0})),!0}function F(u,e){const n=o(e),t=[...u.options].filter(s=>!s.disabled);let a=t.find(s=>o(s.textContent)===n||o(s.value)===n);if(a)return a;const i={\"not applicable\":[\"not applicable\",\"not applicable (n/a)\",\"n/a\",\"none\",\"no quota\",\"non quota\",\"no\"],\"non quota\":[\"non quota\",\"no quota\",\"not applicable\",\"none\"],bangladeshi:[\"bangladeshi\",\"bangladesh\"],islam:[\"islam\",\"muslim\"],male:[\"male\",\"\\u09AA\\u09C1\\u09B0\\u09C1\\u09B7\"],married:[\"married\",\"\\u09AC\\u09BF\\u09AC\\u09BE\\u09B9\\u09BF\\u09A4\"],yes:[\"yes\",\"\\u09B9\\u09CD\\u09AF\\u09BE\\u0981\"],no:[\"no\",\"\\u09A8\\u09BE\"]};for(const s of i[n]||[])if(a=t.find(b=>o(b.textContent)===o(s)||o(b.value)===o(s)),a)return a;return n&&(a=t.find(s=>{const b=o(s.textContent),d=o(s.value);return b&&(b.includes(n)||n.includes(b))||d&&(d.includes(n)||n.includes(d))}),a)?a:null}async function C(u=350){return new Promise(e=>setTimeout(e,u))}async function _(u,e){const n=F(u,e);if(!n)return!1;const t=j(u,n.value);return await C(180),t}async function H(u){for(const e of[\"graduation\",\"masters\"]){if(!u[e+\"Applicable\"])continue;const t=x().find(a=>a.type===\"checkbox\"&&v(a)===e+\"ApplicableCheckbox\");t&&!t.checked&&(t.click(),await C(500))}}async function U(){const u=P||{};if(!Object.keys(u).length)return{filled:0,skipped:0,review:1,details:[\"No saved profile. Create the bookmark again from the profile editor.\"]};await H(u);let e=0,n=0,t=0;const a=[],i=new Set,b=[\"CareOf\",\"Village\",\"District\",\"Upazila\",\"PostOffice\",\"PostCode\"].every(l=>(u[\"present\"+l]||\"\").trim()===(u[\"permanent\"+l]||\"\").trim());let d=x();if(b&&u.presentDistrict){const l=d.find(c=>c.type===\"checkbox\"&&v(c)===\"sameAddressCheckbox\");l&&!l.checked&&(l.click(),await C(350))}for(let l=0;l<3;l++){d=x();let c=0;for(const r of d){if(i.has(r)||r.type===\"checkbox\"||r.type===\"radio\"||r.type===\"submit\"||r.type===\"button\"||r.type===\"file\"||r.type===\"password\")continue;const f=v(r);if(!f)continue;const p=$(u,f);if(p===\"\"||p===null||p===void 0){i.add(r),n++;continue}let N=!1;if(r.tagName===\"SELECT\")N=await _(r,p);else{let h=String(p);if(f===\"dateOfBirth\"&&r.type===\"date\"&&!/^\\d{4}-\\d{2}-\\d{2}$/.test(h)){const m=new Date(h);isNaN(m)||(h=[m.getFullYear(),String(m.getMonth()+1).padStart(2,\"0\"),String(m.getDate()).padStart(2,\"0\")].join(\"-\"))}else if(f===\"dateOfBirth\"&&r.type!==\"date\"){const m=/^\\d{4}-\\d{2}-\\d{2}$/.test(h)?new Date(h+\"T00:00:00\"):new Date(h);!isNaN(m)&&o(r.placeholder).includes(\"dd mm yyyy\")&&(h=[String(m.getDate()).padStart(2,\"0\"),String(m.getMonth()+1).padStart(2,\"0\"),m.getFullYear()].join(\"/\"))}N=j(r,h)}i.add(r),c++,N?(e++,a.push(\"Filled: \"+f)):(t++,a.push(\"Needs review: \"+f+\" (matching dropdown option not found)\")),[\"hasNid\",\"hasBirthRegistration\",\"hasPassport\"].includes(f)&&await C(450)}if(!c)break}for(const l of[\"graduation\",\"masters\"])if(u[l+\"Applicable\"]){const c=Object.keys(u).filter(r=>r.startsWith(l)&&!r.endsWith(\"Applicable\")&&u[r]);for(const r of c)x().some(f=>v(f)===r)||(t++,a.push(\"Not found: \"+r))}return{filled:e,skipped:n,review:t,details:a}}function Y(){const u=x().map(e=>{const n=v(e);return`${e.tagName.toLowerCase()} \\xB7 ${n||\"unmatched\"} \\xB7 ${A(e).slice(0,85)}`});return{detected:u.length,fields:u}}const w=document.createElement(\"div\");w.id=\"gja-host\",w.style.cssText=\"all:initial;position:fixed;left:0;right:0;bottom:0;z-index:2147483647;\";const L=w.attachShadow({mode:\"open\"});L.innerHTML=`<style>*{box-sizing:border-box;font-family:Arial,sans-serif}.box{margin:0 auto;max-width:560px;background:#fff;border:2px solid #167544;border-bottom:0;border-radius:14px 14px 0 0;box-shadow:0 -4px 18px #0004;color:#1c2b22;font-size:14px}.bar{display:flex;align-items:center;gap:8px;padding:8px 10px;background:#167544;color:#fff;border-radius:11px 11px 0 0}.bar b{flex:1}.bar button{background:#ffffff33;color:#fff;border:0;border-radius:8px;min-width:42px;min-height:38px;font-size:18px}.body{padding:10px}.row{display:flex;gap:8px}.row button{flex:1;min-height:48px;border-radius:9px;border:1px solid #167544;background:#fff;color:#167544;font-size:15px;font-weight:bold}.row .pri{background:#167544;color:#fff}button:disabled{opacity:.5}pre{white-space:pre-wrap;word-break:break-word;margin:10px 0 0;max-height:30vh;overflow:auto;font:12px/1.5 Arial,sans-serif;background:#f2f5f3;border-radius:8px;padding:8px}.hide{display:none}</style><div class=\"box\" id=\"box\"><div class=\"bar\"><b>GJ Autofill</b><button id=\"min\">\\u2013</button><button id=\"cls\">\\u2715</button></div><div class=\"body\" id=\"body\"><div class=\"row\"><button class=\"pri\" id=\"fill\">Autofill / \\u09AB\\u09B0\\u09CD\\u09AE \\u09AD\\u09B0\\u09C1\\u09A8</button><button id=\"det\">Detect / \\u0998\\u09B0 \\u09A6\\u09C7\\u0996\\u09C1\\u09A8</button></div><pre id=\"out\">Ready. Review every field. CAPTCHA, photo/signature upload and the final Submit are never automated.\n(\\u0995\\u09CD\\u09AF\\u09BE\\u09AA\\u099A\\u09BE, \\u099B\\u09AC\\u09BF/\\u09B8\\u0987 \\u0986\\u09AA\\u09B2\\u09CB\\u09A1 \\u0993 \\u099A\\u09C2\\u09A1\\u09BC\\u09BE\\u09A8\\u09CD\\u09A4 Submit \\u09A8\\u09BF\\u099C\\u09C7 \\u0995\\u09B0\\u09C1\\u09A8\\u0964)</pre></div></div>`;const g=u=>L.getElementById(u),T=g(\"out\"),S=g(\"fill\"),R=g(\"det\"),D=screen.width<800&&window.innerWidth>screen.width*1.3?Math.min(3,window.innerWidth/screen.width):1;D>1&&(g(\"box\").style.zoom=D);async function O(u){S.disabled=R.disabled=!0,T.textContent=\"Working... \\u098F\\u0995\\u099F\\u09C1 \\u0985\\u09AA\\u09C7\\u0995\\u09CD\\u09B7\\u09BE \\u0995\\u09B0\\u09C1\\u09A8\";try{if(u===\"fill\"){const e=await U();T.textContent=\"Filled: \"+e.filled+\"  |  Skipped (empty): \"+e.skipped+\"  |  Needs review: \"+e.review+`\n\n`+e.details.join(`\n`)}else{const e=Y();T.textContent=\"Detected \"+e.detected+` visible fields\n\n`+e.fields.join(`\n`)}}catch(e){T.textContent=\"Error: \"+(e&&e.message||e)}S.disabled=R.disabled=!1}S.addEventListener(\"click\",()=>O(\"fill\")),R.addEventListener(\"click\",()=>O(\"detect\")),g(\"min\").addEventListener(\"click\",()=>g(\"body\").classList.toggle(\"hide\")),g(\"cls\").addEventListener(\"click\",()=>w.remove()),document.documentElement.appendChild(w)})()})";
+const $ = id => document.getElementById(id);
+function readForm() { const p = {}; for (const el of form.elements) { if (!el.name) continue; p[el.name] = el.type === "checkbox" ? el.checked : (el.value || "").trim(); } return p; }
+const countVals = p => Object.values(p).filter(v => v !== "" && v !== false && v !== null && v !== undefined).length;
+let saveTimer;
+const autosave = () => { clearTimeout(saveTimer); saveTimer = setTimeout(() => store.set({profile: readForm()}), 500); };
+form.addEventListener("input", autosave); form.addEventListener("change", autosave);
+async function copyText(ta, msgEl) {
+  ta.focus(); ta.select(); ta.setSelectionRange(0, ta.value.length);
+  let ok = false;
+  try { ok = document.execCommand("copy"); } catch (_) {}
+  if (!ok && navigator.clipboard) { try { await navigator.clipboard.writeText(ta.value); ok = true; } catch (_) {} }
+  msgEl.textContent = ok ? "✓ Copied / কপি হয়েছে" : "কপি হয়নি: বক্সে লং-প্রেস করে Select all → Copy করুন।";
+}
+const ENGINE_FILE = "/* Government Job Autofill engine - contains no personal data */\n" + ENGINE + "(window.__GJA_P);try{delete window.__GJA_P}catch(_){}\n";
+$("engineText").value = ENGINE_FILE;
+$("copyEngine").addEventListener("click", () => copyText($("engineText"), $("engineMsg")));
+const DEFAULT_ENGINE = "https://cdn.jsdelivr.net/gh/pdntmonir-boop/gj-engine@main/gj.js";
+store.get("engineUrl").then(o => { $("engineUrl").value = o.engineUrl || DEFAULT_ENGINE; });
+$("engineUrl").addEventListener("input", () => store.set({engineUrl: $("engineUrl").value.trim()}));
+function buildCode(p, url) {
+  const q = {}; for (const k in p) if (p[k] !== "" && p[k] !== false && p[k] !== null && p[k] !== undefined) q[k] = p[k];
+  const json = JSON.stringify(q).replace(/[\u007f-\uffff]/g, c => "\\u" + ("0000" + c.charCodeAt(0).toString(16)).slice(-4)).replace(/\*\//g, "*\\/");
+  const src = '(function(){try{window.__GJA_P=/*GJA*/' + json + '/*E*/;var s=document.createElement("script");s.src=' + JSON.stringify(url) + ';s.onerror=function(){alert("GJ Autofill: engine could not load (wrong link, or this site blocks it)")};(document.head||document.documentElement).appendChild(s)}catch(e){alert("GJ Autofill error: "+(e&&e.message||e))}})();void 0;';
+  return "javascript:" + src.replace(/[^\w\-.!~*'()\\{}\[\]:;,=+\/&|$@^"]/g, c => encodeURIComponent(c));
+}
+$("makeBtn").addEventListener("click", async () => {
+  const p = readForm(); await store.set({profile: p});
+  const n = countVals(p);
+  if (n < 8) { alert("আগে আপনার তথ্য দিন (Fill your details first)."); return; }
+  const url = $("engineUrl").value.trim();
+  if (!/^https:\/\//.test(url)) { alert("আগে ধাপ ২-এ ইঞ্জিনের লিংক দিন।"); $("engineUrl").focus(); return; }
+  const code = buildCode(p, url);
+  $("codeText").value = code; $("copyMsg").textContent = "";
+  $("codeInfo").textContent = "Size: " + (code.length / 1024).toFixed(1) + " KB · " + n + " values";
+  $("bookmarkPanel").scrollIntoView({behavior: "smooth"});
+});
+$("copyCode").addEventListener("click", () => { if (!$("codeText").value) { $("copyMsg").textContent = "আগে Create Phone Bookmark চাপুন।"; return; } copyText($("codeText"), $("copyMsg")); });
+$("testText").value = "javascript:" + encodeURIComponent('alert("Bookmark OK \u2713")');
+document.querySelectorAll(".sz").forEach(b => b.addEventListener("click", () => { const kb = +b.dataset.kb; $("testText").value = "javascript:" + encodeURIComponent('alert("' + kb + ' KB OK")') + "/*" + "a".repeat(Math.max(0, kb * 1024 - 70)) + "*/"; $("copyMsg").textContent = kb + " KB test কোড তৈরি। এবার Copy test code চাপুন।"; }));
+$("copyTest").addEventListener("click", () => copyText($("testText"), $("copyMsg")));
+$("backupBtn").addEventListener("click", () => {
+  const box = $("backupPanel"); box.classList.toggle("open");
+  if (box.classList.contains("open")) { $("backupText").value = JSON.stringify({format: "government-job-autofill-profile", version: 1, profile: readForm()}, null, 2); box.scrollIntoView({behavior: "smooth"}); }
+});
+$("copyBackup").addEventListener("click", () => copyText($("backupText"), $("backupMsg")));
+$("dlBackup").addEventListener("click", () => {
+  try {
+    const txt = JSON.stringify({format: "government-job-autofill-profile", version: 1, profile: readForm()}, null, 2);
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([txt], {type: "application/json"}));
+    a.download = "gj-autofill-backup-" + new Date().toISOString().slice(0, 10) + ".json";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+    $("backupMsg").textContent = "✓ ব্যাকআপ ফাইল Downloads-এ নামছে";
+  } catch (_) { $("backupMsg").textContent = "ডাউনলোড হয়নি, Copy backup ব্যবহার করুন।"; }
+});
+function parseImport(text) {
+  text = text.trim(); if (!text) throw new Error("Nothing pasted.");
+  if (/^javascript:/i.test(text) || text.includes("/*GJA*/") || text.includes("%2F*GJA*%2F")) {
+    let dec = text; try { dec = decodeURIComponent(text); } catch (_) {}
+    const m = dec.match(/\/\*GJA\*\/([\s\S]*?)\/\*E\*\//);
+    if (!m) throw new Error("This code has no profile data.");
+    return JSON.parse(m[1]);
+  }
+  const o = JSON.parse(text), p = o.profile || o;
+  if (!p || typeof p !== "object" || Array.isArray(p)) throw new Error("Invalid backup.");
+  return p;
+}
+async function applyImport(text) {
+  try {
+    const p = parseImport(text); await store.set({profile: p}); await loadProfile();
+    statusEl.className = "saved"; statusEl.textContent = "✓ Imported · " + countVals(p) + " values. Now press Create Phone Bookmark.";
+    window.scrollTo({top: 0, behavior: "smooth"});
+  } catch (err) { alert("Import failed: " + err.message); }
+}
+$("importBtn").addEventListener("click", () => applyImport($("importText").value));
+$("importFile").addEventListener("change", async e => { const f = e.target.files[0]; if (f) await applyImport(await f.text()); e.target.value = ""; });
+try { localStorage.setItem("gja_t", "1"); localStorage.removeItem("gja_t"); } catch (_) { $("noStore").hidden = false; }
+loadProfile();
+if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) { navigator.serviceWorker.register("sw.js").catch(() => {}); }
+</script>
+</body>
+</html>
