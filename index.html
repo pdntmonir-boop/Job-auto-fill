@@ -168,15 +168,15 @@ details{margin-top:10px;font-size:13px}summary{cursor:pointer;font-weight:bold;p
       <details><summary>ধাপ ১: ইঞ্জিন GitHub-এ রাখা (শুধু যে ইঞ্জিন বানাচ্ছে তার জন্য, বন্ধু এটা বাদ দেবে)</summary>
       <ol class="steps">
         <li>নিচের <b>Copy engine</b> চাপুন।</li>
-        <li>github.com-এ লগইন করে নতুন <b>Public</b> repository বানান (নাম যেমন <b>gj-engine</b>)।</li>
+        <li>github.com-এ লগইন করে আপনার বর্তমান <b>Job-auto-fill</b> repository-তেই <b>gj.js</b> ফাইল রাখুন।</li>
         <li>Add file → Create new file → নাম <b>gj.js</b> → কপি করা লেখা পেস্ট → Commit changes।</li>
       </ol>
       <textarea id="engineText" class="code" readonly></textarea>
       <div class="btnrow"><button type="button" id="copyEngine" class="outline">Copy engine</button><span id="engineMsg" class="info"></span></div>
       </details>
       <h4 style="margin:14px 0 6px">ধাপ ২: ইঞ্জিনের লিংক (দেওয়া আছে, বদলাতে হবে না)</h4>
-      <input id="engineUrl" inputmode="url" placeholder="https://cdn.jsdelivr.net/gh/ইউজারনেম/gj-engine@main/gj.js">
-      <p class="hint">ইউজারনেম আর repo-র নাম নিজেরটা বসান। একবার দিলেই সেভ থাকবে।</p>
+      <input id="engineUrl" inputmode="url" placeholder="https://cdn.jsdelivr.net/gh/pdntmonir-boop/Job-auto-fill@main/gj.js">
+      <p class="hint">আপনার Job-auto-fill repository-এর Engine URL আগে থেকেই দেওয়া আছে। URL পরিবর্তন করবেন না, যদি repository বা ফাইলের অবস্থান না বদলান।</p>
       <h4 style="margin:14px 0 6px">ধাপ ৩: বুকমার্ক কোড</h4>
       <p class="hint">উপরে তথ্য দিয়ে "Create Phone Bookmark" চাপুন। কোড তৈরি হবে।</p>
       <textarea id="codeText" class="code" readonly placeholder="javascript:..."></textarea>
@@ -330,8 +330,14 @@ async function copyText(ta, msgEl) {
 const ENGINE_FILE = "/* Government Job Autofill engine - contains no personal data */\n" + ENGINE + "(window.__GJA_P);try{delete window.__GJA_P}catch(_){}\n";
 $("engineText").value = ENGINE_FILE;
 $("copyEngine").addEventListener("click", () => copyText($("engineText"), $("engineMsg")));
-const DEFAULT_ENGINE = "https://cdn.jsdelivr.net/gh/pdntmonir-boop/gj-engine@main/gj.js";
-store.get("engineUrl").then(o => { $("engineUrl").value = o.engineUrl || DEFAULT_ENGINE; });
+const DEFAULT_ENGINE = "https://cdn.jsdelivr.net/gh/pdntmonir-boop/Job-auto-fill@main/gj.js";
+store.get("engineUrl").then(o => {
+  const previousEngine = "https://cdn.jsdelivr.net/gh/pdntmonir-boop/gj-engine@main/gj.js";
+  const savedEngine = (o.engineUrl || "").trim();
+  const engine = (!savedEngine || savedEngine === previousEngine) ? DEFAULT_ENGINE : savedEngine;
+  $("engineUrl").value = engine;
+  if (engine !== savedEngine) store.set({engineUrl: engine});
+});
 $("engineUrl").addEventListener("input", () => store.set({engineUrl: $("engineUrl").value.trim()}));
 function buildCode(p, url) {
   const q = {}; for (const k in p) if (p[k] !== "" && p[k] !== false && p[k] !== null && p[k] !== undefined) q[k] = p[k];
